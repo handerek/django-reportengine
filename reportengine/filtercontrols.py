@@ -42,8 +42,8 @@ FilterControl.register(lambda m: isinstance(m,models.CharField),FilterControl,"c
 class DateTimeFilterControl(FilterControl):
     def get_fields(self):
         ln=self.label or self.field_name
-        start=forms.CharField(label=_("%s From")%ln,required=False,widget=forms.DateTimeInput(attrs={'class': 'vDateField'}))
-        end=forms.CharField(label=_("%s To")%ln,required=False,widget=forms.DateTimeInput(attrs={'class': 'vDateField'}))
+        start=forms.DateTimeField(label=_("%s From")%ln,required=False,widget=forms.DateTimeInput(attrs={'class': 'vDateField'}))
+        end=forms.DateTimeField(label=_("%s To")%ln,required=False,widget=forms.DateTimeInput(attrs={'class': 'vDateField'}))
         return SortedDict([("%s__gte"%self.field_name, start),
                            ("%s__lt"%self.field_name, end),])
 
