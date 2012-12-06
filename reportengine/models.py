@@ -29,6 +29,7 @@ class AbstractScheduledTask(models.Model):
     
     class Meta:
         abstract = True
+        ordering = ['-request_made', ]
 
 class ReportRequestManager(models.Manager):
     def completed(self):
