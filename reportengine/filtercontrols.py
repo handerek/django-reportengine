@@ -76,6 +76,20 @@ class BooleanFilterControl(FilterControl):
 FilterControl.register(lambda m: isinstance(m, models.BooleanField), BooleanFilterControl, "boolean")
 
 
+class IntegerFilterControl(FilterControl):
+    
+    def get_fields(self):
+        ln = self.label or self.field_name
+        start = forms.IntegerField(label=_('%s From') % ln, required=False)
+        end = forms.IntegerField(label=_('%s To') % ln, required=False)
+        
+        return SortedDict([
+            ('%s__gte' % self.field_name, start),
+            ('%s__lt' % self.field_name, end),
+        ])
+
+FilterControl.register(lambda m: isinstance(m, models.IntegerField), IntegerFilterControl, "intager")
+
 class ForeignKeyFilterControl(FilterControl):
     
     def __init__(self, *args, **kwargs):
