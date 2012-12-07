@@ -1,5 +1,9 @@
-"""Reports base class. This reports module trys to provide an ORM agnostic reports engine that will allow nice reports to be generated and exportable in a variety of formats. It seeks to be easy to use with querysets, raw SQL, or pure python. An additional goal is to have the reports be managed by model instances as well (e.g. a generic SQL based report that can be done in the backend).
-
+"""
+Reports base class. This reports module trys to provide an ORM agnostic 
+reports engine that will allow nice reports to be generated and exportable in a 
+variety of formats. It seeks to be easy to use with querysets, raw SQL, or pure 
+python. An additional goal is to have the reports be managed by model instances 
+as well (e.g. a generic SQL based report that can be done in the backend).
 """
 from django import forms
 from django.db import models
@@ -80,7 +84,7 @@ class QuerySetReport(Report):
             if isinstance(f,FilterControl):
                 control=f
             else:
-                mfi,mfm=get_lookup_field(self.queryset.model,self.queryset.model,f)
+                mfi, mfm = get_lookup_field(self.queryset.model, self.queryset.model, f)
                 # TODO allow label as param 2
                 control = FilterControl.create_from_modelfield(mfi,f)
             if control:
