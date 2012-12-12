@@ -30,9 +30,13 @@ class ExtendedQuerySetReportMixin(object):
         )
     reportengine.register(TestReport)
     """
+    _params = None
     _aggregates = None
     _property_names = None
     report = None
+    
+    def __init__(self, *args, **kwargs):
+        self._params = kwargs.pop('params', None)
     
     @property
     def labels(self):

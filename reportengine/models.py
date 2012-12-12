@@ -54,7 +54,7 @@ class ReportRequest(AbstractScheduledTask):
     objects = ReportRequestManager()
     
     def get_report(self):
-        return reportengine.get_report(self.namespace, self.slug)()
+        return reportengine.get_report(self.namespace, self.slug)(params=self.params)
     
     @models.permalink
     def get_absolute_url(self):
