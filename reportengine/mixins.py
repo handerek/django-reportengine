@@ -68,14 +68,17 @@ class ExtendedQuerySetReportMixin(object):
             
             for k, v in self.report:
                 if type(v) is FunctionType:
-                    row.append( v(obj) )
+                    row.append( self.normalize_value( v(obj) ) )
                 elif type(v) in [StringType, UnicodeType]:
-                    row.append( values[v] )
+                    row.append( self.normalize_value( values[v] ) )
                 elif isinstance(v, Aggregate):
-                    row.append( getattr(obj, k) )
+                    row.append( self.normalize_value( getattr(obj, k) ) )
                 else:
                     raise TypeError
                 
             rows.append(tuple(row))
 
         return rows, (("total",qs.count()), )
+        
+    def normalize_value(self, val):
+        return val
